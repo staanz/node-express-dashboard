@@ -23,19 +23,19 @@ app.set("port", port);
 const server = http.createServer(app);
 
 /**
+ * Create a WebSocket Server
+ */
+
+const wss = new WebSocket.Server({ server });
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
-
-/**
- * Create a WebSocket Server
- */
-
-const wss = new WebSocket.Server({ server });
-
+wss.on("connection", onConnection(ws));
 /**
  * Normalize a port into a number, string, or false.
  */
