@@ -37,8 +37,10 @@ server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 wss.on("connection", (ws) => {
-    ws.on("message", (message) => {
-        ws.send("Hello from the server! You sent: " + message);
+    ws.on("message", (filePath) => {
+        fs.createReadStream(filePath).on("data", (chunk) => {
+
+        });
     });
 });
 
